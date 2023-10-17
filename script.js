@@ -43,7 +43,7 @@ console.log(allToday);
 
 // }
 const SERVICE_KEY = `YoydCVXD8oU6UaQUlDTq3fKhhTqVTHnG3zEp2CPT4l5OpgfWmpJxINRotG7wMSPjNMeHVrXqFumuDhHWxoZikw%3D%3D`;
-const API_URL = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${SERVICE_KEY}&pageNo=1&numOfRows=12&dataType=JSON&base_date=${allToday}&base_time=1700&nx=60&ny=127`;
+const API_URL = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${SERVICE_KEY}&pageNo=1&numOfRows=12&dataType=JSON&base_date=${allToday}&base_time=2300&nx=60&ny=127`;
 
 async function getWeather () {
 
@@ -56,11 +56,11 @@ async function getWeather () {
     const today_sky = (JSON.stringify(data.response.body.items.item[5].fcstValue));
     const today_temp = (JSON.stringify(data.response.body.items.item[0].fcstValue));
     const today_rain = (JSON.stringify(data.response.body.items.item[6].fcstValue));
-    const today_windy = (JSON.stringify(data.response.body.items.item[4].fcstValue));
+    const today_windy = (JSON.stringify(data.response.body.items.item[4].fcstValue)); //정확하게 가져오려는 데이터의 이름을 차례로 기입해야함
 
     const skyBox = today_sky;
     const rainBox = today_rain;
-    console.log(skyBox);
+    console.log(typeof(skyBox));
     console.log(rainBox);
 
     var Sky = "";
@@ -68,15 +68,19 @@ async function getWeather () {
 
 function skyContent(){
 
-    if(skyBox <= "1"){
+    if(skyBox <= "1" || skyBox == "1"){
  
         Sky += `맑음`;     
 
-    }else if(skyBox >= "2"){
+    }else if(skyBox <= "2"  || skyBox == "2"){
 
         Sky += `구름많음`;  
 
-    }else if(skyBox >= "4"){
+    }else if(skyBox <= "3"  || skyBox == "3"){
+
+        Sky += `구름과 흐림 그 사이`;  
+
+    }else if(skyBox <= "4"  || skyBox == "4"){
 
         Sky += `흐림`;  
 
@@ -92,23 +96,22 @@ function skyContent(){
 
     function rainContent(){
 
-        if(rainBox <= "0"){
+        if(rainBox <= "0" || rainBox == "0"){
     
             Rain += `없음`;     
     
-        }else if(rainBox <= "1"){
-    
+        }else if(rainBox <= "1" || rainBox == "1"){
             Rain += `있음`; 
     
-        }else if(rainBox <= "2"){
+        }else if(rainBox <= "2" || rainBox == "2"){
     
             Rain += `비/눈있음`; 
     
-        }else if(rainBox <= "3"){
+        }else if(rainBox <= "3" || rainBox == "3"){
     
             Rain += `눈소식있음`; 
     
-        }else if(rainBox >= "4"){
+        }else if(rainBox <= "4" || rainBox == "4"){
     
             Rain += `소나기`; 
     
