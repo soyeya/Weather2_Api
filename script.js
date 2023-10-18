@@ -9,10 +9,12 @@ const dates = today.getDate();
 const days  = today.getDay();
 const months  = today.getMonth() + 1;
 const years  = today.getFullYear();
-let today_watch = [today.getHours()] + '00';
-let all_watch = Number(today_watch);
+const today_watch = [today.getHours()] + '00';
+// let all_watch = Number(today_watch);
+
+var timeContent = today_watch;
 console.log(today_watch);
-console.log(all_watch);
+// console.log(all_watch);
 
 const Days_array = [ "Sunday",  "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday", "Saturday"];
 const Month_array = [ "January" , "February" , "March" , "April" , "May" , "Jun" , "July" , "August" , "September" , "Octobor" , "November" , "December"]
@@ -34,18 +36,74 @@ console.log(all_day.Months);
 console.log(all_day.Years);
 
 
-const allToday = all_day.Years + all_day.Months + all_day.Dates;
-console.log(allToday);
+function weatherTime(){
 
-// if(all_watch > 2230){
-
+    if(today_watch >= "2300"){
     
+        timeContent = "2300";
+      
+          
+      }else if(today_watch >= "2000"){
+      
+        timeContent = "2000";
+      
+      }else if(today_watch >= "1700"){
+      
+        timeContent = "1700";
+      
+      }else if(today_watch >= "1400"){
+      
+        timeContent = "1400";
+      
+      }else if(today_watch >= "1100"){
+      
+        timeContent = "1100";
+      
+      }else if(today_watch >= "0800"){
+      
+        timeContent = "0800";
+      
+      }else if(today_watch >= "0500"){
+      
+        timeContent = "0500";
+      
+      }else if(today_watch >= "0200"){
+      
+        timeContent = "0200";
+      
+      }else{
+      
+          console.log('시간설정오류');
+      }
+    
+    };
+    
+    weatherTime();
+    
+    
+        const allToday = all_day.Years + all_day.Months + all_day.Dates;
+        console.log(allToday);
+        const SERVICE_KEY = `YoydCVXD8oU6UaQUlDTq3fKhhTqVTHnG3zEp2CPT4l5OpgfWmpJxINRotG7wMSPjNMeHVrXqFumuDhHWxoZikw%3D%3D`;
+        const API_URL = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${SERVICE_KEY}&pageNo=1&numOfRows=12&dataType=JSON&base_date=${allToday}&base_time=${timeContent}&nx=60&ny=127`;
 
-// }
-const SERVICE_KEY = `YoydCVXD8oU6UaQUlDTq3fKhhTqVTHnG3zEp2CPT4l5OpgfWmpJxINRotG7wMSPjNMeHVrXqFumuDhHWxoZikw%3D%3D`;
-const API_URL = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${SERVICE_KEY}&pageNo=1&numOfRows=12&dataType=JSON&base_date=${allToday}&base_time=2300&nx=60&ny=127`;
+        //공공데이터 포털에서 기상청 api_연장신청해줘야작동함!
+
+const weatherImg = [
+
+    "./img/icon1.svg",
+    "./img/icon2.svg",
+    "./img/icon3.svg",
+    "./img/icon4.svg",
+    "./img/icon5.svg",
+    "./img/icon6.svg",
+    "./img/icon7.svg",
+];
+
+let weatherIcon = document.querySelector(".weatherIcon");
+
 
 async function getWeather () {
+    
 
     const res = await fetch(API_URL);
     const data = await res.json();
@@ -70,19 +128,23 @@ function skyContent(){
 
     if(skyBox <= "1" || skyBox == "1"){
  
-        Sky += `맑음`;     
+        Sky += `맑음`;   
+        weatherIcon.innerHTML =  `<img src=${weatherImg[0]} alt="img1" class="nowIcon">`;   
 
     }else if(skyBox <= "2"  || skyBox == "2"){
 
         Sky += `구름많음`;  
+        weatherIcon.innerHTML =  `<img src=${weatherImg[4]} alt="img1" class="nowIcon">`; 
 
     }else if(skyBox <= "3"  || skyBox == "3"){
 
         Sky += `구름과 흐림 그 사이`;  
+        weatherIcon.innerHTML =  `<img src=${weatherImg[1]} alt="img1" class="nowIcon">`; 
 
     }else if(skyBox <= "4"  || skyBox == "4"){
 
         Sky += `흐림`;  
+        weatherIcon.innerHTML =  `<img src=${weatherImg[4]} alt="img1" class="nowIcon">`; 
 
     }else{
 
