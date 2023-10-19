@@ -53,23 +53,23 @@ function weatherTime(){
 
   }else if(timeContent <= 1100 || timeContent <= 1200 || timeContent <= 1300){
     
-    TimeTable = timeContent;
+    TimeTable = "1100";
 
   }else if(timeContent <= 1400 || timeContent <= 1500 || timeContent <= 1600){
     
-    TimeTable = timeContent;
+    TimeTable = "1400";
 
   }else if(timeContent <= 1700 || timeContent <= 1800 || timeContent <= 1900){
     
-    TimeTable = timeContent;
+    TimeTable = "1700";
 
   }else if(timeContent <= 2000 || timeContent <= 2100 || timeContent <= 2200){
     
-    TimeTable = timeContent;
+    TimeTable =  "2000";
 
   }else if(timeContent <= 2300 || timeContent <= 2400){
     
-    TimeTable = timeContent;
+    TimeTable =  "2300";
 
   }else{
 
